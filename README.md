@@ -122,19 +122,6 @@ both: we read `0xF0` input reports and write the `0xF2` output report directly.
 (`02_enum_gatt.py` therefore reads the GATT tree via BlueZ's D-Bus
 ObjectManager rather than bleak — the remote must be bonded and connected.)
 
-## Safety notes
-
-- The remote also exposes a `fe151500-…` vendor service (read/write/notify/
-  indicate) that looks like config/OTA. **Do not fuzz it** — wrong writes to a
-  firmware surface can brick the remote. The audio path never needs it.
-- Writing `0xF2` (mic enable/disable) is exactly what the stock host does — safe.
-
-## What not to commit
-
-`captures/*.btsnoop|*.bin|*.json|*.wav` are gitignored — they can contain link
-keys, IRKs, and recorded audio. Only `captures/.gitkeep` is tracked. Never paste
-an LTK/IRK into a commit, issue, or PR.
-
 ## Hardware seen on this unit
 
 Name `Amazon Remote`, BT vendor `0x0171` (Amazon), product `0x042F`. hidraw
