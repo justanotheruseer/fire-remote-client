@@ -7,9 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A hardware reverse-engineering tool for the **Fire TV Stick 4K Alexa Voice
 Remote** over BLE: pair it, capture the microphone audio, decode it to WAV, and
 map the buttons. Linux/BlueZ host as central, no sniffer hardware. Validated on
-exactly one unit (Amazon vendor `0x0171`, product `0x042F`); report IDs/codec
-may differ on other models, so changes should preserve the auto-detection paths
-rather than hardcode.
+two units — Fire TV Stick 4K (`0x0171:0x042F`) and Lite (`0x0171:0x041C`):
+identical voice protocol/codec, differing button sets (see `docs/remotes.md`).
+Report IDs/codec may differ on other models, so changes should preserve the
+auto-detection paths rather than hardcode.
 
 Working on this meaningfully requires the physical remote, a BLE adapter, and
 root. Without hardware you can only edit/lint and reason about captures.

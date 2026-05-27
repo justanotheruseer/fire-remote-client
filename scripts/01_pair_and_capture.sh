@@ -137,7 +137,8 @@ btctl remove "$REMOTE_MAC" >/dev/null 2>&1 || true
 cat <<EOF
 
 ============================================================
-  HOLD THE REMOTE'S HOME BUTTON NOW (~10s, until RAPID flash)
+  HOLD THE REMOTE'S HOME BUTTON NOW (~10s to enter pairing mode).
+  NOTE: these remotes have no LED — there's no indicator; just hold it.
   Scanning up to ${SCAN_SECS}s for $REMOTE_MAC ...
 ============================================================
 EOF
@@ -158,7 +159,7 @@ kill "$SCAN_PID" 2>/dev/null || true
 
 if [[ "$found" -ne 1 ]]; then
     echo "ERROR: $REMOTE_MAC never advertised within ${SCAN_SECS}s." >&2
-    echo "       Make sure it's in RAPID-flash pairing mode (hold Home ~10s)." >&2
+    echo "       Hold Home ~10s to enter pairing mode (no LED to confirm it)." >&2
     echo "       If it was paired to a Fire TV, factory-reset it: hold" >&2
     echo "       Left + Back + Menu(☰) together ~12s, then retry." >&2
     exit 1

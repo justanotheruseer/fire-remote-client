@@ -6,13 +6,13 @@ host's own Bluetooth stack, no sniffer hardware.
 
 **Status: solved.** Capture → decode → `.wav` works, and the buttons are mapped.
 
-> ⚠️ **Tested on exactly one device:** the Fire TV Stick 4K Alexa Voice Remote
-> (BT vendor `0x0171`, product `0x042F`, hidraw name `AR`). Report IDs, button
-> codes, the app-shortcut keys, and even the codec may differ on other Fire
-> remote models/revisions. The scripts auto-detect the audio/enable report IDs
-> from the HID descriptor, so they may work elsewhere — but it's unverified.
-> If you try another remote, a PR with its `decode_buttons.py` output and
-> `report_map` (from the capture sidecar) is very welcome.
+> ⚠️ **Tested on two Amazon remotes:** the Fire TV Stick **4K** (`0x0171:0x042F`)
+> and **Lite** (`0x0171:0x041C`) Alexa Voice Remotes. The voice protocol and
+> codec were identical on both; only the button set / vendor services differ
+> (the Lite has no app-shortcut keys and no config/OTA service). See
+> [docs/remotes.md](docs/remotes.md). The scripts auto-detect the audio/enable
+> report IDs from the HID descriptor, so other models may work too — a PR with a
+> new remote's `decode_buttons.py` output + `report_map` is very welcome.
 
 ## TL;DR — the protocol
 
@@ -76,7 +76,8 @@ uv sync
 > any Fire TV (and vice-versa).
 
 `just pair` starts a quiet `btmon` capture, waits for the remote to advertise
-(hold **Home ~10 s** until the LED flashes rapidly), pairs/trusts/connects
+(hold **Home ~10 s** to enter pairing mode — these remotes have **no LED**, so
+there's no visual indicator; just keep holding), pairs/trusts/connects
 non-interactively, then prints the LTK and pairing metadata. Idempotent — re-runs
 just re-extract the LTK.
 
