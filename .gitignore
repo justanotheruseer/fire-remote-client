@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.ruff_cache/
+*.egg-info/
+uv.lock
+
+# Capture artifacts — never commit raw binary/HCI captures by default.
+# These can contain link keys, IRKs, and other secrets.
+captures/*.btsnoop
+captures/*.bin
+captures/*.json
+captures/*.yaml
+captures/*.wav
+captures/*.pcap
+captures/*.pcapng
+
+# But keep the directory itself tracked.
+!captures/.gitkeep
+
+# Secrets we must never leak (see README "What not to commit").
+*.ltk
+keys/
